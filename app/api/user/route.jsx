@@ -1,24 +1,35 @@
-import { db } from "@/config/db";
-import { usersTable } from "@/config/schema";
-import { eq } from "drizzle-orm";
-import { NextResponse } from "next/server";
+import { db } from '../../../config/db';
 
-export async function Post(req){
-    const {email,name}=await req.json();
+import { usersTable } from '../../../config/schema'; 
+import { eq } from 'drizzle-orm';
+import { NextResponse } from 'next/server';
 
-    //if user already exits ?
-    const users=await db.select.from(usersTable).where(eq(usersTable.email,email));
+export async function POST(req) {
+  try {
+    const { email, name } = await req.json();
+    console.log("💡 Received:", { name, email });
 
-
-
-    //if not new user
-    if(users?.length==0){
-        const result=await db.insert(usersTable).values({
-            name:name,
-            email:email
-        }).returning(usersTable);
-        console.log(result)
-        return NextResponse.json(result)
+    if (!email || !name) {
+      return NextResponse.json({ error: "Missing name or email" }, { status: 400 });
     }
-    return NextResponse.json(users[0])
+
+    const users = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.email, email));
+
+    if (users?.length === 0) {
+      const result = await db
+        .insert(usersTable)
+        .values({ name, email })
+        .returning(usersTable);
+        console.log(result)
+      return NextResponse.json(result);
+    }
+
+    return NextResponse.json(users[0]);
+  } catch (error) {
+    console.error("❌ API Error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
 }
