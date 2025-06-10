@@ -2,11 +2,13 @@
 import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import {UserDetailContext} from "../context/UserDetailsContext.jsx"
 
 function Provider({ children }) {
   const { user } = useUser();
 
-  const {userDetail,setUserDetails}=useState();
+  const [userDetail, setUserDetails] = useState();
+
 
   useEffect(() => {
     if (user) {
@@ -20,7 +22,7 @@ function Provider({ children }) {
         name: user?.fullName,
         email: user?.primaryEmailAddress?.emailAddress
       });
-      console.log(result.data); 
+      
       setUserDetails(result.data);
       
     } catch (error) {
@@ -29,9 +31,9 @@ function Provider({ children }) {
   };
 
   return (
-    <UserDetailsContext.Provider value={{userDetail,setUserDetails}}>
+    <UserDetailContext.Provider value={{userDetail,setUserDetails}}>
       <div>{children}</div>
-    </UserDetailsContext.Provider>
+    </UserDetailContext.Provider>
   
   )
 }

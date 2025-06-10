@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 export async function POST(req) {
   try {
     const { email, name } = await req.json();
-    console.log("💡 Received:", { name, email });
+    
 
     if (!email || !name) {
       return NextResponse.json({ error: "Missing name or email" }, { status: 400 });
@@ -23,7 +23,7 @@ export async function POST(req) {
         .insert(usersTable)
         .values({ name, email })
         .returning(usersTable);
-        console.log(result)
+       
       return NextResponse.json(result);
     }
 
