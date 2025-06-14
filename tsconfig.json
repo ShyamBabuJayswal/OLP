@@ -1,14 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true, // 👈 Allows JavaScript files
     "skipLibCheck": true,
-    "strict": false,
+    "strict": false, // Change to true if you want full TS type safety
     "noEmit": true,
     "incremental": true,
     "module": "esnext",
@@ -17,6 +13,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": ".", // 👈 Enables path mapping from project root
+    "paths": {
+      "@/*": ["./*"] // 👈 Allows imports like @/components/Button
+    },
     "plugins": [
       {
         "name": "next"
@@ -25,11 +25,11 @@
   },
   "include": [
     "next-env.d.ts",
-    ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
