@@ -1,8 +1,11 @@
 import React from 'react'
+import WelcomeBanner from './_components/WelcomeBanner'
 
 function Workspace() {
   return (
-    <div>Workspace</div>
+    <div>
+      <WelcomeBanner/>
+    </div>
   )
 }
 
