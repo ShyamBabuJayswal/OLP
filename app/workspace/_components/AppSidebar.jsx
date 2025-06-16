@@ -14,6 +14,7 @@ import { Book, Compass, LayoutDashboard, PencilRulerIcon, PercentCircleIcon, Use
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import NewCourseDailogBox from "./NewCourseDailogBox";
 
  const SideBarOptions=[
     {
@@ -60,7 +61,11 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
          <SidebarGroup>
+          <NewCourseDailogBox>
+
+        
            <Button>Create New Course</Button>
+             </NewCourseDailogBox>
         </SidebarGroup>
           <SidebarGroup>
             <SidebarGroupContent>
