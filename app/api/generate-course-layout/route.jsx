@@ -6,6 +6,8 @@ import {
 } from '@google/genai';
 
 import { NextResponse } from 'next/server';
+import axios from 'axios';
+
 
 const PROMPT = `Generate Learning Course based on the following details. Make sure to add Course Name, Description, Course Banner Image Prompt (Create a modern, flat-style 2D digital illustration representing user Topic. Include UI/UX elements such as mockup screens, text blocks, icons, buttons, and creative workspace tools. Add symbolic elements related to user Course, like sticky notes, design components, and visual aids. Use a vibrant color palette (blues, purples, oranges) with a clean, professional look. The illustration should feel creative, tech-savvy, and educational, ideal for visualizing concepts in user Course) for Course Banner in 3D format. Chapter Name, Topics under each chapter, Duration for each chapter etc., in JSON format only.
 
@@ -67,10 +69,21 @@ export async function POST(req) {
 
   console.log(response.candidates[0].content.parts[0].text); 
 
+ 
   const RawResp=response.candidates[0].content.parts[0].text;
-  const RawJson = RawResp.replace('```json', '').replace('```', '');
-  const JSONresponse=JSON.parse(RawJson);
+const RawJson = RawResp.replace('```json', '').replace('```', '');
+const JSONresponse=JSON.parse(RawJson);
 
+const imagePrompt = JSONresponse.course?.bannerImagePrompt;
+
+
+
+
+  //generate banner  Image 
+
+   const bannerImageUrl= await generateImage(imagePrompt)
+
+ 
 
 
   // Save to database
@@ -78,8 +91,30 @@ export async function POST(req) {
     ...formData,
     courseJson: JSONresponse,
     userEmail: user?.primaryEmailAddress?.emailAddress,
-    cid:courseId
+    cid:courseId,
+    bannerImageUrl:bannerImageUrl
+
   });
 
   return NextResponse.json({courseId:courseId});
+}
+
+const generateImage =async(imagePrompt)=>{
+  const BASE_URL='https://aigurulab.tech';
+const result = await axios.post(BASE_URL+'/api/generate-image',
+        {
+            width: 1024,
+            height: 1024,
+            input:imagePrompt,
+            model: 'sdxl',
+            aspectRatio:"16:9"
+        },
+        {
+            headers: {
+                'x-api-key': process.env.AI_GURU_LAB_API, 
+                'Content-Type': 'application/json', // Content Type
+            },
+        })
+console.log(result.data.image) 
+return result.data.image
 }
