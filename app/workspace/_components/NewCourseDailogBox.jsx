@@ -17,10 +17,14 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
-import { Sparkle } from 'lucide-react';
+import { Loader2Icon, Sparkle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import axios from 'axios';
+import {v4 as uuidv4} from "uuid"
+import { useRouter } from 'next/navigation';
 
 function NewCourseDialogBox({ children }) {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -29,17 +33,36 @@ function NewCourseDialogBox({ children }) {
     category: '',
     level: ''
   });
+  const router=useRouter()
 
   const onHandleInputChange = (field, value) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
-    console.log({ ...formData, [field]: value }); 
+    console.log({ ...formData, [field]: value });
   };
-  const onGenerate =()=>{
+
+  const onGenerate = async () => {
     console.log(formData);
-  }
+    const courseId  = uuidv4()
+    try {
+      setLoading(true);
+    const result = await axios.post('api/generate-course-layout', {
+      ...formData,
+      courseId:courseId
+
+    });
+    console.log(result.data);
+    setLoading(false);
+    router.push('/workspace/edit-course/'+result.data?.courseId)
+    } catch (e) {
+        setLoading(false);
+      console.log(e)
+      
+    }
+  
+  };
 
   return (
     <Dialog>
@@ -99,8 +122,8 @@ function NewCourseDialogBox({ children }) {
                 />
               </div>
               <div className='mt-5'>
-                <Button className='w-full' onClick={onGenerate}>
-                  <Sparkle className="mr-2 h-4 w-4" />
+                <Button className='w-full' onClick={onGenerate} disabled={loading}>
+                  {loading ? <Loader2Icon className='animate-spin' /> : <Sparkle className="mr-2 h-4 w-4" />}
                   Generate Course
                 </Button>
               </div>
