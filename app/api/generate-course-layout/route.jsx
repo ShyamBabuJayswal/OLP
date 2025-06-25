@@ -118,6 +118,3 @@ const result = await axios.post(BASE_URL+'/api/generate-image',
 console.log(result.data.image) 
 return result.data.image
 }
-
-
- 

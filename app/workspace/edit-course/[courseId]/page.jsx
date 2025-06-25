@@ -27,6 +27,7 @@ function EditCourse() {
   return (
     <div>
         <CourseInfo course={course}/>
+        
     </div> 
   )
 }
