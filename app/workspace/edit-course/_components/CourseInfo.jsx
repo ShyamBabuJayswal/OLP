@@ -1,19 +1,34 @@
 import { Button } from '@/@/components/ui/button';
+import axios from 'axios';
 import { Book, Clock, Settings, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 
 function CourseInfo({ course }) {
   const courseLayout = course?.courseJson?.course;
+  const [loading, setLoading] = useState(false);
+
+  const GenerateCourseContent = async () => {
+    try {
+      setLoading(true);
+      const result = await axios.post('/api/generate-course-content', {
+         courseJson: courseLayout,
+        courseTitle: course?.name,
+        courseId: course?.cid,
+      });
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className='md:flex gap-5 justify-between p-5 rounded-2xl shadow'>
       <div className='flex flex-col gap-3'>
-        <h2 className='font-bold text-3xl'>
-          {courseLayout?.name}
-        </h2>
+        <h2 className='font-bold text-3xl'>{courseLayout?.name}</h2>
         <p className='text-gray-500'>{courseLayout?.description}</p>
-
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
           <div className='flex gap-5 items-center p-3 rounded-lg shadow'>
@@ -36,13 +51,21 @@ function CourseInfo({ course }) {
             <TrendingUp className='text-red-500' />
             <section>
               <h2 className='font-bold'>Difficulty Level</h2>
-              <h2>{course?.level || "N/A"}</h2>
+              <h2>{course?.level || 'N/A'}</h2>
             </section>
           </div>
         </div>
-        <Button className={'max-w-sm'}><Settings /> Generate Content</Button>
+
+        <Button onClick={GenerateCourseContent} className='max-w-sm'>
+          <Settings className='mr-2' />
+          {loading ? 'Generating...' : 'Generate Content'}
+        </Button>
       </div>
-      <Image src={course?.bannerImageUrl} alt={'banner Image'} width={400}
+
+      <Image
+        src={course?.bannerImageUrl}
+        alt='banner Image'
+        width={400}
         height={400}
         className='w-full mt-5 md:mt-0 object-cover aspect-auto h-[240px]'
       />
