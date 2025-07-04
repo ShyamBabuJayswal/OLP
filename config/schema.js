@@ -21,6 +21,7 @@ export const coursesTable=pgTable("courses",{
   category:varchar(),
   courseJson:json(),
   bannerImageUrl:varchar().default(''),
+  courseContent:json().default({}),
   userEmail: varchar({ length: 255 }).references(() => usersTable.email)
 
 })
