@@ -3,6 +3,7 @@ import { ai } from "../generate-course-layout/route";
 import axios from 'axios';
 import 'dotenv/config';
 import { title } from "process";
+import { coursesTable } from "@/config/schema";
 
 const PROMPT = `Depends on Chapter name and Topic Generate content for each topic in HTML 
 and give response in JSON format. 
@@ -63,6 +64,9 @@ export async function POST(req) {
   });
 
   const CourseContent = await Promise.all(promises);
+
+  // save to database
+  const dbResponse= await db.update(coursesTable).set({CourseContent}).where(rq(coursesTable.cid,courseId))
 
   return NextResponse.json({
     courseName: courseTitle,
