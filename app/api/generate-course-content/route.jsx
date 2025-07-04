@@ -4,6 +4,8 @@ import axios from 'axios';
 import 'dotenv/config';
 import { title } from "process";
 import { coursesTable } from "@/config/schema";
+import { db } from "@/config/db";
+import { eq } from "drizzle-orm";
 
 const PROMPT = `Depends on Chapter name and Topic Generate content for each topic in HTML 
 and give response in JSON format. 
@@ -66,7 +68,14 @@ export async function POST(req) {
   const CourseContent = await Promise.all(promises);
 
   // save to database
-  const dbResponse= await db.update(coursesTable).set({CourseContent}).where(rq(coursesTable.cid,courseId))
+  try {
+  const dbResponse = await db.update(coursesTable)
+    .set({ courseContent: CourseContent })
+    .where(eq(coursesTable.cid, courseId));
+} catch (err) {
+  console.error("Database update failed", err);
+  throw new Error("Could not save course content to database");
+}
 
   return NextResponse.json({
     courseName: courseTitle,

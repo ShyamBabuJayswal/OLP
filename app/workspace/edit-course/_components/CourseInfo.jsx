@@ -2,26 +2,33 @@ import { Button } from '@/@/components/ui/button';
 import axios from 'axios';
 import { Book, Clock, Settings, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { toast } from 'sonner';
 
 function CourseInfo({ course }) {
   const courseLayout = course?.courseJson?.course;
   const [loading, setLoading] = useState(false);
+  const router=useRouter()
 
   const GenerateCourseContent = async () => {
     try {
       setLoading(true);
+
       const result = await axios.post('/api/generate-course-content', {
          courseJson: courseLayout,
         courseTitle: course?.name,
         courseId: course?.cid,
       });
       console.log(result.data);
+       setLoading(false);
+      router.replace('/workspace');
+      toast.success("Course Generated Successfully")
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
-    }
+       setLoading(false);
+       toast.error("Server side error,Try Again");
+    } 
   };
 
   return (
