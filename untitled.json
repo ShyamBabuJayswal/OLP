@@ -1,0 +1,297 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "qkaAg1g8ynKdfz9fr-9nLX1BquE",
+  "nextPageToken": "CAUQAA",
+  "regionCode": "IN",
+  "pageInfo": {
+    "totalResults": 20750,
+    "resultsPerPage": 5
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "g2_7tJwieGrdQ_ZBwenLq01CeHA",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "mSFxK4jJh80"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-18T14:00:27Z",
+        "channelId": "UCPc9yOXlAFXcLILa104ZEKA",
+        "title": "A satisfying chemical reaction",
+        "description": "vet_techs_pj ✰ ABOUT ME ✰ I'm Dr. Dana Brems, also known as Foot Doc Dana. As a Doctor of Podiatric Medicine (DPM), ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/mSFxK4jJh80/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/mSFxK4jJh80/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/mSFxK4jJh80/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "FootDocDana",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-18T14:00:27Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "ITuZPGWDeYqydm3JL-U4haYS06s",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "j7MPKbeUkGk"
+      },
+      "snippet": {
+        "publishedAt": "2023-05-23T01:45:02Z",
+        "channelId": "UCQGCVWoMtVmYt9rDsOFFSHw",
+        "title": "Chemical Reaction 🧫🔥।। Easy science experiment 👨\u200d🔬।। #ytshorts #viral #shorts #science",
+        "description": "Chemical Reaction ।। Easy science experiment \u200d  ।। #ytshorts #viral #shorts #science #ytshorts #shortsfeed ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/j7MPKbeUkGk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/j7MPKbeUkGk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/j7MPKbeUkGk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Scientist Sir",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-05-23T01:45:02Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "NWTVY1wAeIAqVXz0p0UQqp-4C1U",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "9xuuzsEDZPY"
+      },
+      "snippet": {
+        "publishedAt": "2024-09-09T18:09:26Z",
+        "channelId": "UCQpTC4wcHfAh52B0MrlG7kQ",
+        "title": "Wurtz Reaction, organic chemistry",
+        "description": "Discover the Wurtz Reaction, a fundamental organic chemistry process used to couple alkyl halides and form alkanes.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/9xuuzsEDZPY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/9xuuzsEDZPY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/9xuuzsEDZPY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Science Tadka",
+        "liveBroadcastContent": "none",
+        "publishTime": "2024-09-09T18:09:26Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "smSpijtZi_3_wx0GyhDD0CKxTFQ",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "rjfXmz-PLk8"
+      },
+      "snippet": {
+        "publishedAt": "2024-06-25T03:21:32Z",
+        "channelId": "UCVlGBi6euh2OxJLZcZTFPHA",
+        "title": "Difference between metals and nonmetals",
+        "description": "Difference between metal and nonmetals @StudyYard-",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/rjfXmz-PLk8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/rjfXmz-PLk8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/rjfXmz-PLk8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Study Yard",
+        "liveBroadcastContent": "none",
+        "publishTime": "2024-06-25T03:21:32Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "dibFuFssuPm8z2qFFXPFGxSoqtE",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "28F30bzDcs8"
+      },
+      "snippet": {
+        "publishedAt": "2022-12-23T03:30:00Z",
+        "channelId": "UCl7QL0ptfBq-HHayh7XTDlA",
+        "title": "OMG Tomato 🍅 ki pH value 😱😲 #shorts #viralshorts #youtubeshorts #trending",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/28F30bzDcs8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/28F30bzDcs8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/28F30bzDcs8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Browngirl bhavna",
+        "liveBroadcastContent": "none",
+        "publishTime": "2022-12-23T03:30:00Z"
+      }
+    }
+  ]
+}
+
+import { NextResponse } from "next/server";
+import axios from "axios"; // ✅ Added axios import
+import { ai } from "../generate-course-layout/route";
+
+const PROMPT = `Depends on Chapter name and Topic Generate content for each topic in HTML 
+
+and give response in JSON format. 
+
+Schema:{
+
+chapterName:<>, 
+
+topics: [
+  {
+    topic: <>,
+    content: <>
+  }
+]
+
+}
+
+: User Input:
+`;
+
+const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
+
+export async function POST(req) {
+  const { courseJson, courseTitle, courseId } = await req.json();
+
+  const promises = (courseJson?.chapters || []).map(async (chapter) => {
+    try {
+      // Prepare AI content generation config
+      const config = {
+        responseMimeType: 'text/plain',
+      };
+      const model = 'gemini-2.0-flash';
+      const contents = [
+        {
+          role: 'user',
+          parts: [
+            {
+              text: PROMPT + JSON.stringify(chapter),
+            },
+          ],
+        },
+      ];
+
+      // Call AI model
+      const response = await ai.models.generateContent({
+        model,
+        config,
+        contents,
+      });
+
+      const RawResp = response.candidates[0].content.parts[0].text;
+      const RawJson = RawResp.replace('```json', '').replace('```', '');
+      const JSONresponse = JSON.parse(RawJson);
+
+      // Fetch YouTube video data
+      const youtubeData = await GetYoutubeVideo(chapter?.chapterName);
+      console.log("YouTube Data:", youtubeData);
+      console.log("AI JSON Response:", JSONresponse);
+
+      return {
+        youtubeName: youtubeData,
+        courseData: JSONresponse
+      };
+    } catch (error) {
+      console.error("Error processing chapter:", chapter?.chapterName, error);
+      return {
+        youtubeName: [],
+        courseData: {
+          chapterName: chapter?.chapterName,
+          topics: []
+        }
+      };
+    }
+  });
+
+  const CourseContent = await Promise.all(promises);
+
+  return NextResponse.json({
+    courseName: courseTitle,
+    CourseContent: CourseContent,
+    cid: courseId
+  });
+}
+
+const GetYoutubeVideo = async (topic) => {
+  try {
+    const params = {
+      part: 'snippet',
+      q: topic,
+      maxResults: 4, // ✅ Fixed typo
+      type: 'video',
+      key: process.env.YOUTUBE_API_KEY
+    };
+
+    const resp = await axios.get(YOUTUBE_BASE_URL, { params });
+    const youtubeVideoListResp = resp.data.items;
+
+    const youtubeVideoList = youtubeVideoListResp.map(item => ({
+      videoId: item.id?.videoId,
+      title: item?.snippet?.title
+    }));
+
+    console.log("youtubeVideoList", youtubeVideoList); // ✅ Corrected log
+    return youtubeVideoList;
+  } catch (error) {
+    console.error("YouTube API Error:", error);
+    return [];
+  }
+};
+
