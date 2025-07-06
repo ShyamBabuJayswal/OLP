@@ -1,10 +1,25 @@
 "use client"
 import { Button } from '@/@/components/ui/button';
+import { useUser } from '@clerk/nextjs';
+import axios from 'axios';
+
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function CourseList() {
     const[courseList, setCourseList]=useState([]);
+
+    const {user}=useUser();
+    useEffect(()=>{
+   user &&  GetCourseList();
+    },[user])
+
+    const GetCourseList=async()=>{
+      const result=await axios.get('api/courses')
+      console.log(result.data)
+      setCourseList(result.data)
+      
+    }
   return (
     <div>
         <h2 className='p-5 font-bold text-3xl'>Course List</h2>
@@ -18,7 +33,7 @@ function CourseList() {
 
         </div>:
         <div>
-            List of Courses
+            
         </div>
         }
     </div>
