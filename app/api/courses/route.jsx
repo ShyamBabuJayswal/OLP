@@ -1,7 +1,7 @@
 import { db } from "@/config/db";
 import { coursesTable, usersTable } from "@/config/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { eq } from "drizzle-orm"; 
+import { desc, eq } from "drizzle-orm"; 
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
@@ -23,10 +23,11 @@ export async function GET(req) {
 
     }
     else{ 
-      const result = await db
-    .select()
-    .from(coursesTable)
-    .where(eq(coursesTable.userEmail, user?.primaryEmailAddress?.emailAddress));
+    const result = await db
+  .select()
+  .from(coursesTable)
+  .where(eq(coursesTable.userEmail, user?.primaryEmailAddress?.emailAddress))
+  .orderBy(desc(coursesTable.id))
 
   console.log(result);
   return NextResponse.json(result);
