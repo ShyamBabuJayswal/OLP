@@ -6,6 +6,11 @@ import React from 'react'
 
 function CourseCard({course}) {
     const courseJson=course?.courseJson?.course;
+
+    const onEnrollCourse=()=>{
+
+    }
+
   return (
    <div className='shadow rounded-xl'>
      
@@ -19,7 +24,7 @@ function CourseCard({course}) {
         Chapters
         </h2>
       {course?.courseContent && Object.keys(course.courseContent).length > 0
-  ? <Button size='sm'><PlayCircle /> Start Learning</Button>
+  ? <Button onClick={onEnrollCourse} size='sm'><PlayCircle /> Enroll Course</Button>
   :<Link href={'/workspace/edit-course/'+course?.cid}> <Button size='sm' variant='outline'><Settings /> Generate Course</Button></Link>}
 
       </div>
