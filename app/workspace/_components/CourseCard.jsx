@@ -1,15 +1,36 @@
 import { Button } from '@/@/components/ui/button';
-import { Book, PlayCircle, Settings } from 'lucide-react';
+import axios from 'axios';
+import { Book, PlayCircle, Settings, LoaderCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React, { useState } from 'react';
+import { toast } from 'sonner';
 
 function CourseCard({course}) {
     const courseJson=course?.courseJson?.course;
+    const[loading,setLoading]=useState(false);
 
-    const onEnrollCourse=()=>{
+   const onEnrollCourse = async () => {
+  try {
+    setLoading(true);
 
+    const result = await axios.post('/api/enroll-course', {
+      courseId: course?.cid
+    });
+
+    if (result.data.resp) {
+      toast.warning('Already Enrolled!');
+    } else {
+      toast.success("Enrolled!");
     }
+
+    setLoading(false);
+  } catch (e) {
+    toast.error("Server side error");
+    setLoading(false);
+  }
+}
+
 
   return (
    <div className='shadow rounded-xl'>
@@ -24,8 +45,24 @@ function CourseCard({course}) {
         Chapters
         </h2>
       {course?.courseContent && Object.keys(course.courseContent).length > 0
-  ? <Button onClick={onEnrollCourse} size='sm'><PlayCircle /> Enroll Course</Button>
-  :<Link href={'/workspace/edit-course/'+course?.cid}> <Button size='sm' variant='outline'><Settings /> Generate Course</Button></Link>}
+  ?  (<Button disabled={loading} onClick={onEnrollCourse} size="sm">
+      {loading ? (
+        <LoaderCircle className="animate-spin" />
+      ) : (
+        <>
+          <PlayCircle className="mr-1" />
+          Enroll Course
+        </>
+      )}
+    </Button>
+  ) : (
+    <Link href={`/workspace/edit-course/${course?.cid}`}>
+      <Button size="sm" variant="outline">
+        <Settings className="mr-1" />
+        Generate Course
+      </Button>
+    </Link>
+    )}
 
       </div>
     </div>
