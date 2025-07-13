@@ -109,7 +109,7 @@ const GetYoutubeVideo = async (topic) => {
       
     })
        
-    console.log("youtubeVideoList",youtubeVideoList)
+    // console.log("youtubeVideoList",youtubeVideoList)
     return youtubeVideoList;
     
 
