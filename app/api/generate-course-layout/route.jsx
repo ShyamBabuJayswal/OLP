@@ -116,6 +116,6 @@ const result = await axios.post(BASE_URL+'/api/generate-image',
                 'Content-Type': 'application/json', // Content Type
             },
         })
-console.log(result.data.image) 
+ 
 return result.data.image
 }
