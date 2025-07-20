@@ -1,4 +1,6 @@
+import { Button } from '@/@/components/ui/button';
 import { SelectChapterIndexContext } from '@/context/SelectedChapterIndexContext';
+import { CheckCircle } from 'lucide-react';
 import React, { useContext } from 'react'
 import YouTube from 'react-youtube';
 
@@ -11,13 +13,22 @@ function ChapterContent({courseInfo}) {
  const videoData = courseContent?.[selectChapterIndex]?.youtubeName;
  const topics = courseContent?.[selectChapterIndex]?.courseData?.topics;
 
+  const markChapterCompleted=()=>{
+   let completedChapter=enrollCourse?.completedChapter ?? [];
+   if(completedChapter?.length==0){
+      completedChapter.push(selectChapterIndex);
+   } 
+  }
 
 
   return (
     <div className='p-10'>
+    <div className='flex justify-between items-center'>
      <h2 className='font-bold text-2xl'>{selectChapterIndex+1}. 
      {courseContent?.[selectChapterIndex]?.courseData?.chapterName}
      </h2>
+     <Button onClick={()=>markChapterCompleted()}><CheckCircle/>Mark as Completed</Button>
+     </div>
      <h2 className='my-2 font-bold text-lg'>Related Videos🎬</h2>
      <div>
        {courseContent?.[selectChapterIndex]?.courseData?.chapterName}
