@@ -1,73 +1,64 @@
-import { Button } from '@/@/components/ui/button';
-import axios from 'axios';
-import { Book, PlayCircle, Settings, LoaderCircle } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { toast } from 'sonner';
+"use client";
 
-function CourseCard({course}) {
-    const courseJson=course?.courseJson?.course;
-    const[loading,setLoading]=useState(false);
+import { Input } from "@/components/ui/input";
+import { useUser } from "@clerk/nextjs";
+import axios from "axios";
+import { Search } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import CourseCard from "../_components/CourseCard";
+import { Skeleton } from "@/@/components/ui/skeleton";
+import { Button } from "@/@/components/ui/button";
 
-   const onEnrollCourse = async () => {
-  try {
-    setLoading(true);
+function Explore() {
+  const [courseList, setCourseList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { user } = useUser();
 
-    const result = await axios.post('/api/enroll-course', {
-      courseId: course?.cid
-    });
-
-    if (result.data.resp) {
-      toast.warning('Already Enrolled!');
-    } else {
-      toast.success("Enrolled!");
+  useEffect(() => {
+    if (user) {
+      GetCourseList();
     }
+  }, [user]);
 
-    setLoading(false);
-  } catch (e) {
-    toast.error("Server side error");
-    setLoading(false);
-  }
-}
-
+  const GetCourseList = async () => {
+    try {
+      const result = await axios.get("/api/courses?courseId=0");
+      setCourseList(result.data);
+    } catch (error) {
+      console.error("Failed to fetch courses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-   <div className='shadow rounded-xl'>
-     
-        <Image src={course?.bannerImageUrl} alt={course?.name} width={400} height={'300'} className='w-full aspect-video rounded-t-xl object-cover'/>
-   
-    <div className='p-3 flex flex-col gap-3'>
-      <h2 className='font-bold text-lg'>{course?.courseJson?.name}</h2>
-      <p className='line-clamp-3 text-gray-400 text-sm'>{courseJson?.description}</p>
-      <div className='flex justify-between items-center'>
-        <h2 className='flex items-center text-sm gap-2'><Book className='text-primary h-5 w-5'/>{courseJson?.noOfChapters} 
-        Chapters
-        </h2>
-      {course?.courseContent && Object.keys(course.courseContent).length > 0
-  ?  (<Button disabled={loading} onClick={onEnrollCourse} size="sm">
-      {loading ? (
-        <LoaderCircle className="animate-spin" />
-      ) : (
-        <>
-          <PlayCircle className="mr-1" />
-          Enroll Course
-        </>
-      )}
-    </Button>
-  ) : (
-    <Link href={`/workspace/edit-course/${course?.cid}`}>
-      <Button size="sm" variant="outline">
-        <Settings className="mr-1" />
-        Generate Course
-      </Button>
-    </Link>
-    )}
+    <div className="p-6 md:p-10">
+      <h2 className="font-bold text-3xl mb-6">Explore More Courses</h2>
 
+      {/* Search Bar */}
+      <div className="flex gap-5 max-w-md mb-8">
+        <Input placeholder="Search for a course..." />
+        <Button><Search className="mr-1" />Search</Button>
+      </div>
+
+      {/* Course Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        {!loading ? (
+          courseList?.length > 0 ? (
+            courseList.map((course, index) => (
+              <CourseCard key={index} course={course} />
+            ))
+          ) : (
+            <p className="col-span-full text-gray-500">No courses found.</p>
+          )
+        ) : (
+          [0, 1, 2, 3].map((_, index) => (
+            <Skeleton key={index} className="w-full h-[240px] rounded-xl" />
+          ))
+        )}
       </div>
     </div>
-   </div>
-  )
+  );
 }
 
-export default CourseCard
+export default Explore;
