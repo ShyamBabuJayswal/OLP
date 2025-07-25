@@ -25,12 +25,12 @@ import NewCourseDailogBox from "./NewCourseDailogBox";
      {
       title:'My Learning',
       icon:Book,
-      path:"/workspace/my-courses"
+      path:"/workspace/my-learning"
     },
      {
       title:'Explore Courses',
       icon:Compass,
-      path:"/workspace/explore"
+      path:"/workspace/explore-course"
     },
      {
       title:'AI Tools',
