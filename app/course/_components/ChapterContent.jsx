@@ -1,24 +1,54 @@
 import { Button } from '@/@/components/ui/button';
 import { SelectChapterIndexContext } from '@/context/SelectedChapterIndexContext';
-import { CheckCircle } from 'lucide-react';
-import React, { useContext } from 'react'
+import axios from 'axios';
+import { CheckCircle, Cross, Loader2Icon, X } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import React, { useContext, useState } from 'react'
 import YouTube from 'react-youtube';
+import { toast } from 'sonner';
 
-function ChapterContent({courseInfo}) {
+function ChapterContent({courseInfo,refreshData}) {
+  const {courseId}=useParams();
+
     if (!courseInfo) return <div className='p-10'>Loading...</div>;
-  const {course,enrollCourse}=courseInfo;
+  const {course,enrollCourse}=courseInfo ?? ''; 
    
   const courseContent=courseInfo?.courses?.courseContent;
   const{selectChapterIndex,setSelectChapterIndex}=useContext(SelectChapterIndexContext);
  const videoData = courseContent?.[selectChapterIndex]?.youtubeName;
  const topics = courseContent?.[selectChapterIndex]?.courseData?.topics;
+ let completedChapter=enrollCourse?.completedChapter ?? [];
+ const [loading,setLoading]=useState(false);
 
-  const markChapterCompleted=()=>{
-   let completedChapter=enrollCourse?.completedChapter ?? [];
-   if(completedChapter?.length==0){
-      completedChapter.push(selectChapterIndex);
-   } 
+  const markChapterCompleted=async ()=>{
+    setLoading(true);
+  completedChapter.push(selectChapterIndex);
+      const result=await axios.put('/api/enroll-course',{
+        courseId:courseId,
+        completedChapter:completedChapter
+      });
+      console.log(result);
+      refreshData()
+      toast.success('Chapter Marked Completed!')
+      setLoading(false);
+   
   }
+   const markChapterInCompleted=async ()=>{
+    setLoading(false);
+      const completedChapter=completedChapter.filter(item=>item!=selectChapterIndex);
+      const result=await axios.put('/api/enroll-course',{
+        courseId:courseId,
+        completedChapter:completedChapter
+      });
+      console.log(result);
+      refreshData()
+      toast.success('Chapter Marked InCompleted!')
+      setLoading(false);
+   
+  }
+
+  
+
 
 
   return (
@@ -27,7 +57,17 @@ function ChapterContent({courseInfo}) {
      <h2 className='font-bold text-2xl'>{selectChapterIndex+1}. 
      {courseContent?.[selectChapterIndex]?.courseData?.chapterName}
      </h2>
-     <Button onClick={()=>markChapterCompleted()}><CheckCircle/>Mark as Completed</Button>
+
+    {!completedChapter?.includes(selectChapterIndex)?<Button onClick={()=>markChapterCompleted()}
+    disabled={loading}
+    >
+      {loading ?<Loader2Icon className='animate-spin'/>:<CheckCircle/>}
+    Mark as Completed</Button>
+    :
+    <Button variant="outline" onClick={markChapterInCompleted} disabled={loading}>
+       {loading ?<Loader2Icon className='animate-spin'/>:
+    <X/>}Mark incomplete </Button>}
+
      </div>
      <h2 className='my-2 font-bold text-lg'>Related Videos🎬</h2>
      <div>
